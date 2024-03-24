@@ -30,12 +30,12 @@ A Chat UI system that uses NextJS for frontend and ExpressJS for backend
 * Similar concept with normal Routing, but folder name is to be surrounded by ```[]```
 * ```src/app/products/page.jsx``` will be rendered when the client visits ```www.{domain-name}/products``` in the browser
 * This page can be used to show a general products page
-* Example: ```src/app/products/[productId]/page.jsx``` (note: notice the surrounding []) will be rendered dynamically when the client visits ```www.{domain-name}/products/{productId}``` in the browser
-* eg: When the user visits ```www.{domain-name}/products/69``` in the browser, the component will receive a parameter of object arranged as
+* Example: ```src/app/products/[productId]/page.jsx``` (note: notice the surrounding ```[]```) will be rendered dynamically when the client visits ```www.{domain-name}/products/{productId}``` in the browser
+* eg: When the user visits ```www.{domain-name}/products/69``` in the browser, the component will receive a parameter of object arranged as:
 ```
 {
     params: {
-        productId: {productId}
+        productId: 69
     }
 }
 ```
