@@ -7,10 +7,10 @@ const PORT = 8080
 app.use(cors()) // allow cross origin sharing
 app.use(express.json()) // decode request received from frontend
 
-app.post('/login', (request, response) => {
+app.post('/login', (req, res) => {
 })
 
-app.get('/chat', (request, response) => {
+app.get('/chat', (req, res) => {
 })
 
 app.listen(PORT, () => {
