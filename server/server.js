@@ -34,7 +34,12 @@ app.post('/user', (req, res) => {
   const { userId } = req.body
   axios(`http://13.212.255.177/api/chatSystem/user/${userId}`).then(response => {
     res.json(response.data)
-  })
+  }).catch(err => {
+      console.error(err)
+      res.json({
+        message: err.data.error
+      })
+    })
 })
 
 app.listen(PORT, () => {
