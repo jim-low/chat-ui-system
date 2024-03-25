@@ -21,7 +21,8 @@ const ChatApplication = () => {
 
   return (
     <div className='center'>
-      Welcome, {currentUser.username}!
+      {currentUser.username == null && "Loading..."}
+      {currentUser.username != null && `Welcome, ${currentUser.username}!`}
     </div>
   )
 }
