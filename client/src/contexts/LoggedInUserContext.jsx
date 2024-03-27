@@ -5,10 +5,10 @@ import React, { createContext, useContext, useState } from 'react'
 const LoggedInUserContext = createContext(null)
 
 export function LoggedInUserProvider({ children }) {
-  const [loggedInUser, _] = useState(null)
+  const [loggedInUser, setLoggedInUser] = useState(null)
 
   return (
-    <LoggedInUserContext.Provider value={{ loggedInUser }}>
+    <LoggedInUserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
       { children }
     </LoggedInUserContext.Provider>
   )

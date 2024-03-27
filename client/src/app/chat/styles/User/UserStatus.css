@@ -1,0 +1,11 @@
+#userStatus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+}
+
+#userStatus .user-name p {
+  text-align: center;
+}

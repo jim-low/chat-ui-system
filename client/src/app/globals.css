@@ -5,11 +5,16 @@
   --accent-color: #5e4ae3;
   --red: #ff0150;
   --notification-color: #fead02;
+
+  --radius: 15px;
+  --gap: 15px;
 }
 
 html, body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  background-color: var(--grey);
 }
 
 *, *::before, *::after {

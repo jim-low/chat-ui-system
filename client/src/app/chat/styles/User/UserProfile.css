@@ -1,0 +1,8 @@
+#userProfile {
+  width: 30%;
+  height: 100%;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  margin-right: var(--gap);
+  box-shadow: 3px 0 18px rgba(0, 0, 0, 0.2);
+}
