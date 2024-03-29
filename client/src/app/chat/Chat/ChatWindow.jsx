@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import SearchBar from '../Utilities/SearchBar'
 import { useChatUser } from '@/contexts/ChatUserContext';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const TopPart = ({ user }) => {
@@ -39,7 +39,7 @@ const TopPart = ({ user }) => {
         </Flex>
       </Flex>
       <Flex className="right" align="center" justify='end' gap='2'>
-        <div class="search-container">
+        <div className="search-container">
           <SearchBar />
         </div>
         <Flex align='center' justify='center' className="icon">
@@ -100,7 +100,7 @@ const BottomPort = ({ fromUser, toUser }) => {
   )
 }
 
-const Message = ({ user, message, selfSent }) => {
+const Message = ({ image, user, message, selfSent }) => {
   const ProfilePic = () =>
     <div className="image-container">
       <Image
@@ -113,11 +113,27 @@ const Message = ({ user, message, selfSent }) => {
     </div>
 
   return (
-    <Flex gap="4" mt="5" justify={selfSent ? 'end' : 'start'}>
+    <Flex gap="4" mt="5" justify={selfSent ? 'end' : 'start'} mb="5">
       { !selfSent && <ProfilePic /> }
       <Flex className="message-container" direction='column' align={selfSent ? 'end' : 'start'}>
         <Text weight="bold" mb="2">{user.username}</Text>
-        <Text className={`message-box ${selfSent && 'self-sent'}`}>{message}</Text>
+        <Text className={`message-box ${selfSent && 'self-sent'}`}>
+
+          {
+            image != null &&
+              <React.Fragment>
+                <Image
+                  width={256}
+                  height={256}
+                  src={image}
+                  alt="Media Image"
+                  style={{ borderRadius: 20, marginBottom: 15 }}
+                />
+                <br />
+              </React.Fragment>
+          }
+          {message}
+        </Text>
       </Flex>
       { selfSent && <ProfilePic /> }
     </Flex>
@@ -144,7 +160,7 @@ const ChatWindow = () => {
             messages.map((msg, i) => {
               const sentByLoggedInUser = msg.fromUser === loggedInUser?.id
               return (
-                <Message key={i} user={sentByLoggedInUser ? loggedInUser : chatUser} message={msg.message} selfSent={sentByLoggedInUser} />
+                <Message key={i} user={sentByLoggedInUser ? loggedInUser : chatUser} message={msg.message} selfSent={sentByLoggedInUser} image={msg.image} />
               )
             })
         }

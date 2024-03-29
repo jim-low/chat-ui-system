@@ -32,6 +32,7 @@
 
 #userProfile .top-part .floating-card .icon {
   font-size: 2rem;
+  cursor: pointer;
 }
 
 #userProfile .top-part .floating-card .buttons {

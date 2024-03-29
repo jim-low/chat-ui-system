@@ -38,11 +38,11 @@ const GroupsDisplay = () => {
         <p>Groups ({groupsList?.length})</p>
         <p>+</p>
       </div>
-      <div className="groupsList">
+      <Flex className="groupsList" gap="3" direction='column'>
         {
           groupsList.map((group, i) => <Group key={i} groupName={group.name} />)
         }
-      </div>
+      </Flex>
     </div>
   )
 }
