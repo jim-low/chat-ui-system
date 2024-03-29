@@ -4,87 +4,92 @@ import '../styles/DirectMessage/DirectMessagesDisplay.css'
 import axios from 'axios'
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import Image from 'next/image'
+import { Button, Flex, Text } from '@radix-ui/themes'
+import clip from 'text-clipper'
+import moment from 'moment'
+import { useChatUser } from '@/contexts/ChatUserContext'
 
 const DirectMessagesDisplay = () => {
   const [searchText, setSearchText] = useState('')
-  const [chatList, setChatList] = useState([])
+  const [usersList, setUsersList] = useState([])
   const { loggedInUser } = useLogInUser()
 
   useEffect(() => {
     axios('http://13.212.255.177/api/chatSystem/users/list').then(res => {
-      const list = []
-      for (const person of res.data) {
-        if (person.id !== loggedInUser?.id) {
-          list.push(person)
-        }
-      }
-      setChatList(list)
+      setUsersList(res.data.filter(user => user.id !== loggedInUser?.id))
     })
   }, [loggedInUser])
 
+  const matchUsername = user => user.username.match(new RegExp(searchText, "i"))
+  const renderChat = (user, i) => <Chat key={i} user={user} loggedInUserId={loggedInUser?.id} /> 
+
   return (
-    <div id="directMessagesDisplay">
-      <SearchBar
-        value={searchText}
-        handleChange={e => setSearchText(e.target.value)}
-        placeholder='Search Contact'
-      />
-
-      <div className="messagesList">
-        { chatList.length === 0 && "Loading..."}
-        {
-          searchText.length === 0 && 
-            chatList.map(chat => {
-              return (
-                <Chat
-                  key={chat?.id}
-                  id={chat?.id}
-                  profileImage={chat?.profileImage}
-                  username={chat?.username}
-                  sentByCurrentUser={Math.random() < 0.5}
-                />
-              )
-            })
-        }
-      </div>
-
-      <div className="buttons-container">
-        <div className="primary-button btn">Meeting</div>
-        <div className="btn">Schedule</div>
-      </div>
-
-    </div>
+    <Flex id="directMessagesDisplay" direction='column'>
+      <Flex className='search-container' justify='center' align='center'>
+        <SearchBar
+          value={searchText}
+          handleChange={e => setSearchText(e.target.value)}
+          placeholder='Search Contact'
+        />
+      </Flex>
+      <Flex className='messagesList' direction="column" align='center' gap="3">
+        { usersList.length === 0 && "Loading..."}
+        { searchText.length === 0 && usersList.map(renderChat) }
+        { searchText.length !== 0 && usersList.filter(matchUsername).length === 0 && "No Results." }
+        { searchText.length !== 0 && usersList.filter(matchUsername).map(renderChat) }
+      </Flex>
+      <Flex className='buttons-container' justify='between' align='center'>
+        <Button className="primary-button btn" size='2'><Text>Meeting</Text></Button>
+        <Button className="btn" size='2'><Text color='gray'>Schedule</Text></Button>
+      </Flex>
+    </Flex>
   )
 }
 
-const Chat = ({ id, profileImage, username, sentByCurrentUser = false }) => {
-  const [recentMessage, setRecentMessage] = useState("")
+const Chat = ({ user, loggedInUserId }) => {
+  const { setChatUser } = useChatUser()
+  const [info, setInfo] = useState({
+    date: "",
+    time: "",
+    message: "",
+    sentByCurrentUser: false
+  })
 
-  {/* useEffect(() => { */}
-  {/*   axios(`http://13.212.255.177/api/chatSystem/chatByUserId/${id}`).then(res => { */}
-  {/*   }) */}
-  {/* }, []) */}
+  useEffect(() => {
+    axios(`http://13.212.255.177/api/chatSystem/chatByUserId/${user?.id}`).then(res => {
+      if (res.data.length === 0) return
+
+      const data = res.data[res.data.length - 1]
+      const timestamp = moment(data?.timestamp)
+      const date = timestamp.format("MMM DD YYYY")
+      const time = timestamp.format("hh.mmA")
+      const message = clip(data?.message, 30)
+      const sentByCurrentUser = (loggedInUserId === data?.fromUser)
+
+      setInfo({ date, time, message, sentByCurrentUser })
+    })
+  }, [user])
 
   return (
-    <div className="chat">
+    <Flex justify='center' gap="3" mt="1" mb="1" width='100%' onClick={() => setChatUser(user)}>
       <div className="user-image">
         <Image
-          src={profileImage}
-          alt={username}
+          src={user?.profileImage}
+          alt={user?.username}
           width={60}
           height={60}
           style={{ borderRadius: "50%" }}
         />
       </div>
-      <div className="user-details">
-        <div className="name">{username}</div>
-        <div className="message">{sentByCurrentUser && "You: "}lorem ipsum and some stuff idk</div>
-        <div className="timestamp">
-          <span className="date">Dec 12 69420</span>
-          <span className="time">10.69AM</span>
-        </div>
-      </div>
-    </div>
+      <Flex direction='column' width="60%">
+        <Text weight='medium' className="name">{user?.username}</Text>
+        <Text color='gray' className="message">{info.sentByCurrentUser && "You: "}{info.message}</Text>
+        <Flex justify='between'>
+          <Text className="date">{info.date}</Text>
+          <Text className="time">{info.time}</Text>
+        </Flex>
+      </Flex>
+    </Flex>
   )
 }
 

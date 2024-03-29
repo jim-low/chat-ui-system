@@ -5,6 +5,7 @@
   justify-content: space-between;
   gap: var(--gap);
   margin: 5px;
+  background-color: var(--grey);
 }
 
 .sider {

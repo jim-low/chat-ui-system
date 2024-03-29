@@ -1,12 +1,13 @@
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import '../styles/User/UserStatus.css'
 import Image from 'next/image'
+import { Flex, Text } from '@radix-ui/themes'
 
 const UserStatus = () => {
   const { loggedInUser: user } = useLogInUser()
 
   return (
-    <div id="userStatus">
+    <Flex id='userStatus' direction="column" justify="center" align="center" >
       <div className="user-image">
         <Image
           src={user?.profileImage}
@@ -17,9 +18,9 @@ const UserStatus = () => {
         />
       </div>
       <div className="user-name">
-        <p style={{ margin: 0, marginTop: 5 }}>{user?.username.split(" ")[0]}</p>
+        <Text align="center" m="0" mt="3px" weight="bold">{user?.username.split(" ")[0]}</Text>
       </div>
-    </div>
+    </Flex>
   )
 }
 

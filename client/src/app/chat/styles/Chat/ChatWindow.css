@@ -1,6 +1,72 @@
 #chatWindow {
-  width: 70%;
-  height: 100%;
   background-color: var(--white);
   border-radius: var(--radius);
+}
+
+#chatWindow .top {
+  height: 15%;
+  border-bottom: 3px solid var(--grey);
+}
+
+#chatWindow .top .right {
+  width: 60%;
+}
+
+#chatWindow .search-container {
+  width: 50%;
+}
+
+#chatWindow .top .right .icon {
+  --size: 40px;
+
+  font-size: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid grey;
+  width: var(--size);
+  height: var(--size);
+}
+
+#chatWindow .bottom {
+  height: 15%;
+  border-top: 3px solid var(--grey);
+}
+
+#chatWindow .bottom .input-container {
+  width: 45%;
+}
+
+#chatWindow .bottom .buttons {
+  width: 32%;
+  font-size: 1.8rem;
+}
+
+#chatWindow .bottom .buttons .special-icon {
+  color: var(--white);
+  font-size: 2rem;
+  background-color: var(--red);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+#chatWindow .mid {
+  height: 100%;
+  overflow: auto;
+  padding: 0 5px;
+}
+
+#chatWindow .mid .message-box {
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem;
+  width: 70%;
+  background-color: var(--white);
+  border-radius: 0 20px 20px 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+#chatWindow .mid .message-box.self-sent {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 20px 0 20px 20px;
 }

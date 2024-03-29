@@ -7,16 +7,19 @@ import styles from './styles/ChatApplication.module.css'
 import DesktopSidebarNav from './Navigation/NavBar'
 import UserStatus from './User/UserStatus'
 import { LoggedInUserProvider, useLogInUser } from '@/contexts/LoggedInUserContext'
-import { Box, Flex } from '@radix-ui/themes'
+import { Box, Flex, Heading } from '@radix-ui/themes'
 import DirectMessagesDisplay from './DirectMessage/DirectMessagesDisplay'
 import GroupsDisplay from './Groups/GroupsDisplay'
 import ChatWindow from './Chat/ChatWindow'
 import UserProfile from './User/UserProfile'
+import { ChatUserProvider } from '@/contexts/ChatUserContext'
 
 const ChatAppContainer = () => {
   return (
     <LoggedInUserProvider>
-      <ChatApplication />
+      <ChatUserProvider>
+        <ChatApplication />
+      </ChatUserProvider>
     </LoggedInUserProvider>
   )
 }
@@ -34,11 +37,9 @@ const ChatApplication = () => {
     const userId = localStorage.getItem('userId')
     if (userId == null) router.replace('/login')
 
-    axios.post('http://localhost:8080/user', {
-      userId: +userId || 3 // for testing
-    }).then(res => {
-        setCurrentUser(res.data)
-        setLoggedInUser(res.data)
+    axios(`http://13.212.255.177/api/chatSystem/user/${+userId}`).then(res => {
+      setCurrentUser(res.data)
+      setLoggedInUser(res.data)
     })
   }, [])
 
@@ -53,15 +54,15 @@ const ChatApplication = () => {
       <div className={styles.mainSection}>
 
         <div className={styles.topSection}>
-          <h3>Chat</h3>
-          <p>Add New profile</p>
+          <Heading>Chat</Heading>
+          <p style={{ margin: 0 }}>Add New profile</p>
         </div>
 
         <div className={styles.mainUI}>
-          <div className={styles.displaySection}>
+          <Flex direction='column' className={styles.displaySection}>
             <DirectMessagesDisplay />
             <GroupsDisplay />
-          </div>
+          </Flex>
           <div className={styles.chatSection}>
             <ChatWindow />
             <UserProfile />

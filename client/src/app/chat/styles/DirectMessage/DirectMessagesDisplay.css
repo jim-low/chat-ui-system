@@ -1,17 +1,26 @@
 #directMessagesDisplay {
   background-color: var(--white);
-  height: 50%;
+  height: 100%;
   border-radius: var(--radius);
 }
 
+#directMessagesDisplay .search-container {
+  width: 80%;
+  height: 15%;
+  margin: 0 auto;
+}
+
 #directMessagesDisplay .messagesList {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 15px;
   overflow-y: auto;
-  height: 67%;
+  height: 100%;
   margin-top: 5px;
+}
+
+#directMessagesDisplay .buttons-container {
+  margin: 0 auto;
+  width: 80%;
+  height: 15%;
 }
 
 #directMessagesDisplay .messagesList::-webkit-scrollbar {
@@ -19,16 +28,12 @@
 }
 
 #directMessagesDisplay .chat {
-  display: flex;
-  justify-content: center;
   gap: 8px;
   max-width: 86%;
   margin: 8px 0;
 }
 
 #directMessagesDisplay .chat .user-details {
-  display: flex;
-  flex-direction: column;
   gap: 8px;
 }
 
@@ -37,14 +42,8 @@
   font-size: 1.1rem;
 }
 
-#directMessagesDisplay .chat .message {
-  color: grey;
-}
-
 #directMessagesDisplay .chat .timestamp {
   font-size: 0.8rem;
-  display: flex;
-  justify-content: space-between;
   gap: 5px;
   width: 100%;
 }
@@ -60,12 +59,4 @@
 .btn.primary-button {
   background-color: var(--accent-color);
   color: white;
-}
-
-#directMessagesDisplay .buttons-container {
-  margin: 10px auto;
-  width: 90%;
-
-  display: flex;
-  justify-content: space-around;
 }
