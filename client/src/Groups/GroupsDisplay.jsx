@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import '../styles/Groups/GroupsDisplay.css'
+import './styles/GroupsDisplay.css'
 import axios from 'axios'
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import { Flex, Text } from '@radix-ui/themes'

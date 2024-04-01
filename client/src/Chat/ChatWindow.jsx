@@ -6,7 +6,7 @@ import { MdOutlineTextFormat, MdOutlineAlternateEmail  } from "react-icons/md";
 import { AiOutlinePicture, AiOutlineLink } from "react-icons/ai";
 import { PiSmileyLight } from "react-icons/pi";
 import { FaRegPaperPlane } from "react-icons/fa";
-import '../styles/Chat/ChatWindow.css'
+import './styles/ChatWindow.css'
 import Image from 'next/image'
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import SearchBar from '../Utilities/SearchBar'

@@ -1,7 +1,6 @@
 import { Flex, Grid, Text } from '@radix-ui/themes'
-import '../styles/User/UserProfile.css'
+import './styles/UserProfile.css'
 import Image from 'next/image'
-import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import { VscLocation } from "react-icons/vsc";
 import { MdPersonAddAlt } from "react-icons/md";
 import { FiMessageCircle } from "react-icons/fi";

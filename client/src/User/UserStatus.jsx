@@ -1,5 +1,5 @@
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
-import '../styles/User/UserStatus.css'
+import './styles/UserStatus.css'
 import Image from 'next/image'
 import { Flex, Text } from '@radix-ui/themes'
 

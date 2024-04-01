@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import SearchBar from '../Utilities/SearchBar'
-import '../styles/DirectMessage/DirectMessagesDisplay.css'
+import './styles/DirectMessagesDisplay.css'
 import axios from 'axios'
 import { useLogInUser } from '@/contexts/LoggedInUserContext'
 import Image from 'next/image'

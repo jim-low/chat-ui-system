@@ -1,7 +1,7 @@
 import { RxCalendar, RxGear, RxHome, RxPerson, RxReader } from 'react-icons/rx'
 import { BsBuilding, BsChat, BsEnvelope } from "react-icons/bs"
 import { AiOutlineHourglass } from "react-icons/ai"
-import styles from '../styles/Navigation/Navbar.module.css'
+import styles from './styles/Navbar.module.css'
 import { Flex } from '@radix-ui/themes'
 import { useState } from 'react'
 
