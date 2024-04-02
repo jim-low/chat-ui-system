@@ -1,6 +1,8 @@
 /client/node_modules
 /client/.next
 /client/package-lock.json
+/client/build
 
 /server/package-lock.json
 /server/node_modules
+/server/build
