@@ -1,6 +1,6 @@
 #groupsDisplay {
   background-color: var(--white);
-  height: 70%;
+  height: 40%;
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;

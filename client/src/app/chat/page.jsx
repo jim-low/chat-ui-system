@@ -4,7 +4,6 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './ChatApplication.module.css'
-import DesktopSidebarNav from '../../Navigation/NavBar'
 import UserStatus from '../../User/UserStatus'
 import { LoggedInUserProvider, useLogInUser } from '@/contexts/LoggedInUserContext'
 import { Flex, Heading } from '@radix-ui/themes'
@@ -13,6 +12,7 @@ import GroupsDisplay from '../../Groups/GroupsDisplay'
 import ChatWindow from '../../Chat/ChatWindow'
 import UserProfile from '../../User/UserProfile'
 import { ChatUserProvider } from '@/contexts/ChatUserContext'
+import NavBar from '../../Navigation/NavBar'
 
 const ChatAppContainer = () => {
   return (
@@ -47,7 +47,7 @@ const ChatApplication = () => {
     <div id={styles.chatApplication}>
 
       <div className={styles.sider}>
-        <DesktopSidebarNav />
+        <NavBar />
         <UserStatus />
       </div>
 
@@ -59,7 +59,7 @@ const ChatApplication = () => {
         </div>
 
         <div className={styles.mainUI}>
-          <Flex direction='column' className={styles.displaySection}>
+          <Flex direction='column' justify='between' className={styles.displaySection}>
             <DirectMessagesDisplay />
             <GroupsDisplay />
           </Flex>

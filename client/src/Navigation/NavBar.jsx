@@ -32,7 +32,7 @@ const DesktopSidebarNav = () => {
   }
 
   return (
-    <Flex direction="column" justify="center" gap="5" className={styles.desktopNav}>
+    <Flex direction='column' justify='between' align='center' className={styles.desktopNav}>
       {
         navItems.map(nav => {
           return  <NavIcon key={nav.name} icon={nav.icon} isActive={nav.active} handleClick={() => resetActive(nav.name)}/>

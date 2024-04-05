@@ -5,14 +5,16 @@ import * as Form  from '@radix-ui/react-form'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Flex } from '@radix-ui/themes'
+import { Button, Flex } from '@radix-ui/themes'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   function formLogin(e) {
+    setLoading(true)
     axios('http://13.212.255.177/api/chatSystem/users/list').then(res => {
       const users = res.data
       for (let i = 0; i < users.length; ++i) {
@@ -57,9 +59,9 @@ const Login = () => {
         </Form.Field>
 
         <Form.Submit asChild>
-          <button className="Button" style={{ marginTop: 10 }} onClick={formLogin}>
+          <Button className="Button" style={{ marginTop: 10 }} onClick={formLogin} loading={loading} disabled={loading}>
             Login
-          </button>
+          </Button>
         </Form.Submit>
       </Form.Root>
     </Flex>
